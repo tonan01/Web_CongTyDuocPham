@@ -1,4 +1,5 @@
 ﻿@using Web_CongTyDuocPham.Models;
+@model List<DUOCPHAM>
 @{
     ViewBag.Title = "Products";
     Layout = "~/Views/_LayoutPage1.cshtml";
@@ -33,7 +34,7 @@
                         @*Liên kết chọn và chi tiết*@
                         <div class="row text-center">
                             <div class="col-md-12 text-center mt-2">
-                                <a href="/Customer/ChiTietSP/@s.ID_LOAIDUOCPHAM" class="btn btn-outline-primary">Chi tiết</a>
+                                <a href="@Url.Action("ChiTietSP",new {@id=@s.ID_DUOCPHAM })" class="btn btn-outline-primary">Chi tiết</a>
                                 <a href="/Customer/ChonMua/@s.ID_DUOCPHAM" class="btn btn-outline-primary">Chọn</a>
                             </div>
                         </div>

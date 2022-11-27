@@ -109,6 +109,7 @@ namespace Web_CongTyDuocPham.Controllers
             List<DUOCPHAM> dsDPCCD = data.DUOCPHAMs.Where(i => i.ID_DANHMUC == sp.ID_DANHMUC).ToList();
 
             // Truyền qua view bag
+            Session["DSLQ"] = dsDPCCD;
             ViewBag.dsSCCD = dsDPCCD;
 
             return View(sp);

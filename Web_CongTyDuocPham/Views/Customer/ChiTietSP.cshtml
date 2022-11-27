@@ -3,7 +3,7 @@
     ViewBag.Title = "ChiTietSP";
     Layout = "~/Views/_LayoutPage1.cshtml";
 
-    var lst = ViewBag.dsDPCCD as List<DUOCPHAM>;   /* Lấy danh sách có cùng danh mục */
+    var lst = Session["DSLQ"]  as List<DUOCPHAM>;   /* Lấy danh sách có cùng danh mục */
 }
 
 @* Hiển thị 1 dược phẩm *@
@@ -21,7 +21,7 @@
     <div class="row">
         @* Banner -------------------------------------------------------------------------------------- *@
         <div class="col-md-4">
-            <img class="w-75" src="~/Content/img/@Model.HINHANH" />
+            <img class="w-75" src="~/Content/images/@Model.HINHANH" />
         </div>
 
         @* Danh sách các quyển sách -------------------------------------------------------------------- *@
