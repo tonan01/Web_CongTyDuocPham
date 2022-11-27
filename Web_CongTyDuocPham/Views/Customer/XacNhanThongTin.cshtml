@@ -1,0 +1,48 @@
+﻿@using Web_CongTyDuocPham.Models;
+@{
+    ViewBag.Title = "XacNhanThongTin";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+@model TAIKHOAN
+
+<div class="container-fluid">
+    @* Tiêu đề ----------------------------------------------------------------------------------------- *@
+    <div class="row p-2 text-center mb-5">
+        <div class="col-md-12">
+            <h4 class="fw-bold">ĐẶT HÀNG</h4>
+        </div>
+    </div>
+
+    @* Nội dung ---------------------------------------------------------------------------------------- *@
+    <div class="row text-center mb-5">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form action="/Customer/LuuDatHang" method="post">
+                <table class="table text-center">
+                    <tr>
+                        <td>Họ tên khách hàng: </td>
+                        <td>@Model.ID_USER</td>
+                    </tr>
+                    <tr>
+                        @* Ngày đặt là ngày hiện tại *@
+                        <td>Ngày đặt:</td>
+                        <td>@DateTime.Now.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày giao hàng:</td>
+                        <td>
+                            <input type="date" name="txtNgay" class="glyphicon-calendar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input class="btn btn-outline-success" type="submit" value="Đồng ý đặt hàng" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

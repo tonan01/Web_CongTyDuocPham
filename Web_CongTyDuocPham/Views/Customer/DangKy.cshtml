@@ -1,0 +1,52 @@
+﻿@model Web_CongTyDuocPham.Models.TAIKHOAN
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+@using (Html.BeginForm("XLDangKy", "Customer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<section class="vh-100">
+    <div class="mask d-flex align-items-center h-50">
+        <div class="container h-50">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card" style="border-radius: 15px; background-color: #00008B; ">
+                        <div class="card-body p-5">
+                            <h2 class="fw-bold text-center mb-5 text-white">ĐĂNG KÝ TÀI KHOẢN</h2>
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <form>
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.ID_USER, new { htmlAttributes = new { @class = "form-control  form-control-lg" } })
+                                    <label class="form-label text-white-50">Email</label>
+                                    @Html.ValidationMessageFor(model => model.ID_USER, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.PASS, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label class="form-label text-white-50">Mật khẩu</label>
+                                    @Html.ValidationMessageFor(model => model.PASS, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-outline-light btn-lg shadow px-5 mb-0 mt-2">Đăng ký</button>
+                                </div>
+
+                                <p class="text-center text-white-50 mt-5 mb-0">
+                                    Bạn đã có tài khoản? <a href="/Customer/DangNhap" class="fw-bold text-success"><u>Đăng nhập</u></a>
+                                </p>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+}

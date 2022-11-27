@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "TimKiem";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<section>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-50">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card text-white" style="border-radius: 1rem; background-color: #CD661D; ">
+                    <div class="card-body p-5 text-center">
+                        <h2 class="fw-bold mb-5 text-uppercase">TÌM KIẾM</h2>
+                        <form action="/Customer/XuLyTimKiem" method="post" class="text-center">
+                            <div class="form-outline form-white mb-5">
+                                <label class="form-label text-white-50">Tên dược phẩm cần tìm</label>
+                                <input type="text" name="txtTuKhoa" class="form-control form-control-lg" />
+                            </div>
+                            <div class="form-outline form-white mb-5">
+                                <label class="form-label text-white-50">Loại</label>
+                                @Html.DropDownList("maLoai")
+                            </div>
+                            <button class="btn btn-outline-light btn-lg shadow px-5 mb-0 mt-2" type="submit">Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,50 @@
+﻿@using Web_CongTyDuocPham.Models;
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+@* Hiển thị nhiều dược phẩm *@
+@model List<DUOCPHAM>
+
+<div class="container-fluid">
+    @* Giới thiệu *@
+    <div class="row">
+        <div class="col-md-12 align-items-center justify-content-center text-center">
+            <img src="~/Content/images/logo.png" class="w-25 shadow p-3 mb-5 bg-body rounded rounded-circle" />
+        </div>
+    </div>
+
+    @* Tiêu đề ----------------------------------------------------------------------------------------------------------------- *@
+    <div class="row">
+        <div class="col-md-12 text-center mb-2">
+            <h4 class="p-2" style="color:blue; font-weight:bold">Công ty Dược phẩm BBD</h4>
+            <hr />
+        </div>
+    </div>
+
+    @* Nội dung ---------------------------------------------------------------------------------------------------------------- *@
+    <div class="row">
+        <div class="product-group">
+            <div class="row text-center">
+                @foreach (DUOCPHAM s in Model)
+                {
+                    <div class="col-md-3 text-center">
+                        <img src="~/Content/images/@s.HINHANH" class="w-50" /> <br />
+                        <h6>@s.TEN_DUOCPHAM</h6>
+                        Giá: <text style="font-weight: bold" class="text-danger">@s.GIA</text><br />
+                        @*Liên kết chọn và chi tiết*@
+                        <div class="row text-center">
+                            <div class="col-md-12 text-center mt-2">
+                                <a href="/Customer/ChiTietSP/@s.ID_LOAIDUOCPHAM" class="btn btn-outline-primary">Chi tiết</a>
+                                <a href="/Customer/ChonMua/@s.ID_DUOCPHAM" class="btn btn-outline-primary">Chọn</a>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
