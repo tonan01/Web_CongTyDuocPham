@@ -6,39 +6,29 @@
 }
 
 <div class="container-fluid">
-    @* Tiêu đề -------------------------------------------------------------------------------------------------------- *@
-    <div class="row p-2 text-center mb-5">
-        <div class="col-md-12">
-            <h4 class="fw-bold">DANH SÁCH DƯỢC PHẨM</h4>
-        </div>
-    </div>
-
-    
     <div class="row">
-        @* Navbar ----------------------------------------------------------------------------------------------------- *@
-        <!--<div class="col-md-3">-->
-            @* DS chủ đề *@
-            <!--<p class="p-1 font-weight-bold" style="background-color:azure">Danh mục dược phẩm</p>-->
-            @*@Html.Action("HTLoai", "Customer")*@
-        <!--</div>-->
+        <div class="col-md-3">
+            <p class="fw-bold nav navbar">DANH MỤC</p>
+            @Html.Action("HTLoai", "Customer")
+        </div>
 
-        @* Danh sách dược phẩm ---------------------------------------------------------------------------------------- *@
-        <div class="product-group">
-            <div class="row text-center">
+        <div class="col-md-9">
+            <div class="row">
+                <h4 class="fw-bold mb-5 text-center">DANH SÁCH DƯỢC PHẨM</h4>
                 @foreach (var s in Model)
                 {
-                    <div class="col-md-3 text-center">
-                        <img src="~/Content/images/@s.HINHANH" class="w-50" /> <br />
-                        <h6 style="font-size:15px;">@s.TEN_DUOCPHAM</h6>
-                        Giá: <text style="font-weight: bold" class="text-danger">@s.GIA</text><br />
-                        @*Liên kết chọn và chi tiết*@
-                        <div class="row text-center">
-                            <div class="col-md-12 text-center mt-2">
+                    <div class="col-md-3 mb-3 text-center">
+                        <div class="card bg-light mb-3">
+                            <img class="card-img-top" src="~/Content/images/@s.HINHANH" width="100%">
+                            <div class="card-body">
+                                <h6 style="font-size:15px;" class="card-title">@s.TEN_DUOCPHAM</h6>
+                                <p class="card-text">Giá: <text style="font-weight: bold" class="text-danger">@s.GIA</text></p>
+                            </div>
+                            <div class="card-footer">
                                 <a href="@Url.Action("ChiTietSP",new {@id=@s.ID_DUOCPHAM })" class="btn btn-outline-primary">Chi tiết</a>
                                 <a href="/Customer/ChonMua/@s.ID_DUOCPHAM" class="btn btn-outline-primary">Chọn</a>
                             </div>
                         </div>
-                        <hr />
                     </div>
                 }
             </div>

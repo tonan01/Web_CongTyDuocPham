@@ -1,11 +1,11 @@
 ﻿@using Web_CongTyDuocPham.Models;
 
-@model List<LOAIDUOCPHAM>
+@model List<DANHMUC>
 <ul class="nav flex-column">
     @foreach (var item in Model)
     {
-        <li class="border text-info">
-            @Html.ActionLink(item.ID_LOAIDUOCPHAM, "HTSPTheoLoai", "Customer", new { maL = @item.ID_LOAIDUOCPHAM },
+        <li class="nav-item">
+            @Html.ActionLink(item.TEN_DANHMUC, "HTSPTheoLoai", "Customer", new { maL = @item.ID_DANHMUC },
                     new { @class = "nav-link" })
         </li>
     }

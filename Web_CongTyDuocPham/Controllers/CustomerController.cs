@@ -30,21 +30,21 @@ namespace Web_CongTyDuocPham.Controllers
             return View();
         }
 
-        //// Hiển thị loại sản phẩm ------------------------------------------------------------------------------------------------
-        //public ActionResult HTLoai()
-        //{
-        //    List<DANHMUC> dsLoai = data.DANHMUCs.ToList(); // Truyền sang view
-        //    return PartialView(dsLoai);
-        //}
+        // Hiển thị loại sản phẩm ------------------------------------------------------------------------------------------------
+        public ActionResult HTLoai()
+        {
+            List<DANHMUC> dsLoai = data.DANHMUCs.ToList(); // Truyền sang view
+            return PartialView(dsLoai);
+        }
 
-        //// Hiển thị sản phẩm theo loại -------------------------------------------------------------------------------------------
-        //public ActionResult HTSPTheoLoai(string maL)
-        //{
-        //    List<DANHMUC> dsSP = data.DANHMUCs.Where(t => t.ID_DANHMUC == int.Parse(maL)).ToList();
+        // Hiển thị sản phẩm theo loại -------------------------------------------------------------------------------------------
+        public ActionResult HTSPTheoLoai(string maL)
+        {
+            List<DUOCPHAM> dsSP = data.DUOCPHAMs.Where(t => t.ID_DANHMUC == int.Parse(maL)).ToList();
 
-        //    // Trả về cùng 1 view với view Home
-        //    return View("Products", dsSP);
-        //}
+            // Trả về cùng 1 view với view Home
+            return View("Products", dsSP);
+        }
 
         // Hiển thị danh sách tất cả dược phẩm -----------------------------------------------------------------------------------
         public ActionResult Products()

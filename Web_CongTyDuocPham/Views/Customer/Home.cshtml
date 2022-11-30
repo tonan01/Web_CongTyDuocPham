@@ -8,43 +8,55 @@
 @* Hiển thị nhiều dược phẩm *@
 @model List<DUOCPHAM>
 
-<div class="container-fluid">
+<div class="container-fluid mb-5 bg-light">
     @* Giới thiệu *@
-    <div class="row">
+    <!--<div class="row">
         <div class="col-md-12 align-items-center justify-content-center text-center">
             <img src="~/Content/images/logo.png" class="w-25 shadow p-3 mb-5 bg-body rounded rounded-circle" />
         </div>
-    </div>
-
+    </div>-->
     @* Tiêu đề ----------------------------------------------------------------------------------------------------------------- *@
-    <div class="row">
+    <!--<div class="row">
         <div class="col-md-12 text-center mb-2">
             <h4 class="p-2" style="color:blue; font-weight:bold">Công ty Dược phẩm BBD</h4>
             <hr />
         </div>
-    </div>
+    </div>-->
 
     @* Nội dung ---------------------------------------------------------------------------------------------------------------- *@
-    <div class="row">
-        <div class="product-group">
-            <div class="row text-center">
-                @foreach (DUOCPHAM s in Model)
-                {
-                    <div class="col-md-3 text-center">
-                        <img src="~/Content/images/@s.HINHANH" class="w-50" /> <br />
-                        <h6>@s.TEN_DUOCPHAM</h6>
-                        Giá: <text style="font-weight: bold" class="text-danger">@s.GIA</text><br />
-                        @*Liên kết chọn và chi tiết*@
-                        <div class="row text-center">
-                            <div class="col-md-12 text-center mt-2">
-                                <a href="/Customer/ChiTietSP/@s.ID_LOAIDUOCPHAM" class="btn btn-outline-primary">Chi tiết</a>
-                                <a href="/Customer/ChonMua/@s.ID_DUOCPHAM" class="btn btn-outline-primary">Chọn</a>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                }
+    <div class="container mb-5" align="center">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Content/images/logo_slide.png" class="d-block w-75">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/slide1.png" class="d-block w-75">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/slide2.png" class="d-block w-75">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/slide3.png" class="d-block w-75">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/slide4.png" class="d-block w-75">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/slide5.png" class="d-block w-75">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/slide6.png" class="d-block w-75">
+                </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 </div>

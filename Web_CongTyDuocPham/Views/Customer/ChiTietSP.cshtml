@@ -11,9 +11,9 @@
 
 <div class="container-fluid">
     @* Tiêu đề ----------------------------------------------------------------------------------------- *@
-    <div class="row">
-        <div class="col-md-12 text-center mb-2">
-            <h4 class="p-2" style="background-color: #F8F8FF; color:blue">Chi tiết sản phẩm</h4>
+    <div class="row p-2 text-center mb-5">
+        <div class="col-md-12">
+            <h4 class="fw-bold">CHI TIẾT DƯỢC PHẨM</h4>
         </div>
     </div>
 
@@ -24,32 +24,39 @@
             <img class="w-75" src="~/Content/images/@Model.HINHANH" />
         </div>
 
-        @* Danh sách các quyển sách -------------------------------------------------------------------- *@
+        @* Danh sách các dược phẩm --------------------------------------------------------------------- *@
         <div class="col-md-8">
             <h5>@Model.TEN_DUOCPHAM</h5>
             <p>Giá bán: <text style="color:red; font-weight:bold">@Model.GIA</text></p>
-            <button class="btn bg-info text-white mt-2">Đặt mua</button>
+            <a href="/Customer/ChonMua/@Model.ID_DUOCPHAM" class="btn btn-outline-success">Chọn mua</a>
         </div>
     </div>
 
-    @* Sản phẩm có cùng loại ----------------------------------------------------------------------- *@
+    @* Sản phẩm có cùng loại --------------------------------------------------------------------------- *@
     @* Tiêu đề ---------------------------------------------------------------- *@
-    <div class="row mt-5">
-        <div class="col-md-12 text-center mb-2">
-            <h4 class="p-2" style="background-color: #F8F8FF; color:blue">Các dược phẩm tương tự</h4>
+    <hr style="color:#8e8e8e" />
+    <div class="row mt-5 mb-2">
+        <div class="col-md-12 text-center mb-5">
+            <h4 class="fw-bold">CÁC DƯỢC PHẨM TƯƠNG TỰ</h4>
         </div>
 
         @* Nội dung --------------------------------------------------------------- *@
         <div class="row">
             <div class="product-group">
                 <div class="row text-center">
-                    @foreach (var i in lst)
+                    @foreach (var s in lst)
                     {
-                        <div class="col-md-3 text-center mb-2">
-                            <img class="w-75 mt-2 mb-1" src="~/Content/images/@i.HINHANH" />
-                            <h6 style="font-size:15px;" class="card-title">@i.TEN_DUOCPHAM</h6>
-                            <a href="/Customer/ChiTietSP/@i.ID_DUOCPHAM" class="btn btn-info">Chi tiết</a>
-                            <hr style="color:#8e8e8e" />
+                        <div class="col-md-3 mb-3 text-center">
+                            <div class="card bg-light mb-3">
+                                <img class="card-img-top" src="~/Content/images/@s.HINHANH" width="100%">
+                                <div class="card-body">
+                                    <h6 style="font-size:15px;" class="card-title">@s.TEN_DUOCPHAM</h6>
+                                    <p class="card-text">Giá: <text style="font-weight: bold" class="text-danger">@s.GIA</text></p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="@Url.Action("ChiTietSP",new {@id=@s.ID_DUOCPHAM })" class="btn btn-outline-primary">Chi tiết</a>
+                                </div>
+                            </div>
                         </div>
                     }
                 </div>
