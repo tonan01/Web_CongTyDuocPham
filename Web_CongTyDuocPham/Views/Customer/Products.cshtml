@@ -4,32 +4,49 @@
     ViewBag.Title = "Products";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
+<style>
+    .product-item__name {
+        font-weight: 400;
+        height: 39px !important;
+        line-height: -0.19999999999999996rem;
+        overflow: hidden;
+        /* dấu ... cuối  */
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        /* tác động dòng 2 */
+        -webkit-line-clamp: 2;
+    }
+    .btn-product-item {
+        width:87px;
+    }
 
+</style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <p class="fw-bold nav navbar">DANH MỤC</p>
             @Html.Action("HTLoai", "Customer")
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="row">
                 <h4 class="fw-bold mb-5 text-center">DANH SÁCH DƯỢC PHẨM</h4>
                 @foreach (var s in Model)
                 {
-                    <div class="col-md-3 mb-3 text-center">
-                        <div class="card bg-light mb-3">
-                            <img class="card-img-top" src="~/Content/images/@s.HINHANH" width="100%">
-                            <div class="card-body">
-                                <h6 style="font-size:15px;" class="card-title">@s.TEN_DUOCPHAM</h6>
-                                <p class="card-text">Giá: <text style="font-weight: bold" class="text-danger">@s.GIA</text></p>
-                            </div>
-                            <div class="card-footer">
-                                <a href="@Url.Action("ChiTietSP",new {@id=@s.ID_DUOCPHAM })" class="btn btn-outline-primary">Chi tiết</a>
-                                <a href="/Customer/ChonMua/@s.ID_DUOCPHAM" class="btn btn-outline-primary">Chọn</a>
+                        <div class="col-md-3 mb-3 text-center product-item-text-center">
+                            <div class="card bg-light mb-3">
+                                <img class="card-img-top" src="~/Content/images/@s.HINHANH" width="100%">
+                                <div class="card-body">
+                                    <h4 class="product-item__name" style="FONT-WEIGHT: 300; font-size: 1rem;">@s.TEN_DUOCPHAM</h4>
+                                    <p class="card-text">Giá: <text style="font-weight: bold" class="text-danger">@string.Format("{0:0,0}", s.GIA) VNĐ</text></p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="@Url.Action("ChiTietSP",new {@id=@s.ID_DUOCPHAM })" class="btn btn-outline-primary btn-product-item">Chi tiết</a>
+                                    <a href="/Customer/ChonMua/@s.ID_DUOCPHAM" class="btn btn-outline-primary btn-product-item">Chọn</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 }
             </div>
         </div>

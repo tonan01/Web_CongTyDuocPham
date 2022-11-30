@@ -1,0 +1,10 @@
+﻿.product-item-text-center {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.product-item-text-center:hover {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.05);
+}
+

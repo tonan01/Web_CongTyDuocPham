@@ -66,8 +66,18 @@
                             @String.Format("{0:#,##}", Model.TongThanhTien()) VNĐ
                         </td>
                         <td colspan="3" align="center">
-                            @Html.ActionLink("Đặt hàng", "XacNhanThongTin", "Customer",
-                            new { @class = "btn btn-outline-success" })
+                            @{
+                                if (Session["KhachHang"] == null)
+                                {
+                                    <a class="btn btn-outline-success px-3 me-2 shadow" data-bs-toggle="modal" href="#DangNhap" role="button">Đặt hàng</a>
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Đặt hàng", "XacNhanThongTin", "Customer",
+                                    new { @class = "btn btn-outline-success" })
+                                }
+                            }
+
                         </td>
                     </tr>
                 </table>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -96,7 +97,7 @@ namespace Web_CongTyDuocPham.Controllers
         {
             data.TAIKHOANs.InsertOnSubmit(kh);
             data.SubmitChanges();
-            return RedirectToAction("DangNhap", "Customer");
+            return PartialView("DangKy", "Customer");
         }
 
         // Trả về chi tiết 1 dược phẩm theo mã danh mục -------------------------------------------------------------------------
@@ -164,8 +165,7 @@ namespace Web_CongTyDuocPham.Controllers
             TAIKHOAN khach = Session["KhachHang"] as TAIKHOAN;
 
             if (khach == null) // Chưa đăng nhập
-                return RedirectToAction("DangNhap", "Customer");
-
+                return View("DangNhap", "Customer");
             // Đã tồn tại khách hàng (Đăng nhập thành công)
             return View(khach);
         }

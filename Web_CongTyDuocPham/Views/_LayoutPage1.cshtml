@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
     <script src="~/Content/bootstrap-5.0.2/js/bootstrap.bundle.js"></script>
     <title>@ViewBag.Title</title>
+    <link href="~/Public/Assets/css/style.css" rel="stylesheet" />
 </head>
 
 @using Web_CongTyDuocPham.Models;
@@ -15,8 +16,8 @@
     <nav class="navbar navbar-expand-lg bg-white fixed-top shadow-sm">
         <div class="container-fluid">
             @*<a class="navbar-brand" href="/Customer/Home">
-                <img src="~/Content/images/logo.png" width="10%" />
-            </a>*@
+                    <img src="~/Content/images/logo.png" width="10%" />
+                </a>*@
             <div class="collapse navbar-collapse" id="navbarButtonsExample">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item active">
@@ -33,8 +34,11 @@
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
-                    <a href="/Customer/DangNhap" class="btn btn-outline-success px-3 me-2 shadow">Đăng nhập</a>
-                    <a href="/Customer/DangKy" class="btn btn-outline-primary me-3 shadow">Đăng ký</a>
+                    <a class="btn btn-outline-success px-3 me-2 shadow" data-bs-toggle="modal" href="#DangNhap" role="button">Đăng nhập</a>
+                    <a class="btn btn-outline-primary me-3 shadow" style=" width: 111px;" data-bs-toggle="modal" href="#DangKy" role="button">Đăng ký</a>
+
+                    @*<a href="/Customer/DangNhap" class="btn btn-outline-success px-3 me-2 shadow">Đăng nhập</a>
+                    <a href="/Customer/DangKy" class="btn btn-outline-primary me-3 shadow">Đăng ký</a>*@
                     @* Hiển thị tên người dùng đang sử dụng *@
                     @{
                         if (Session["KhachHang"] != null)
@@ -114,5 +118,10 @@
             </div>
         </footer>
     </section>
+    <!--Dang Nhap-->
+    @Html.Action("DangNhap", "Customer")
+    <!--Dang ky-->
+    @Html.Action("DangKy", "Customer")
+
 </body>
 </html>
