@@ -47,14 +47,14 @@
                     @foreach (DanhMucGioHang item in Model.lst)
                     {
                         <tr>
-                            @*<td>@item.iMaSP</td>*@
+                            <td>@item.iMaSP</td>
                             <td>@item.sTenSP</td>
                             <td><img src="~/Content/images/@item.sAnhBia" width="10%" /></td>
-                            <td>@item.iSoLuong</td>
+                            <td width="12%"><input type="number" style="width:50px;height:26px;" min="1" name="txtSoLuong" value="@item.iSoLuong" size="2" /></td>
                             <td>@String.Format("{0:#,##}", item.dDonGia) VNĐ</td>
                             <td>@String.Format("{0:#,##}", item.ThanhTien) VNĐ</td>
-                            <td><a href="#">Chi tiết</a></td>
-                            <td><a href="#">Xóa</a></td>
+                            <td><a href="@Url.Action("ChiTietSP",new {@id=item.iMaSP })">Chi tiết</a></td>
+                            <td><a href="@Url.Action("XoaGioHang",new {@maSP=item.iMaSP.ToString() })">Xóa</a></td>
                             <td><a href="#">Sửa</a></td>
                         </tr>
                     }

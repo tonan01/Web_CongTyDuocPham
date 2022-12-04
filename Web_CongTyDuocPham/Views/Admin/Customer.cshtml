@@ -1,0 +1,40 @@
+﻿@using Web_CongTyDuocPham.Models;
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+@model List<TAIKHOAN>
+
+<div class="container-fluid">
+    @* Tiêu đề ----------------------------------------------------------------------------------------- *@
+    <div class="row p-2 text-center mb-5">
+        <div class="col-md-12 align-items-center justify-content-center">
+            <h4 class="fw-bold">DANH SÁCH TÀI KHOẢN KHÁCH HÀNG</h4>
+        </div>
+    </div>
+
+    @* Nội dung ---------------------------------------------------------------------------------------- *@
+    <div class="row mt-2 mb-2">
+        <div class="col-md-12 text-center justify-content-center align-items-center">
+            <form action="#" method="post">
+                <table class="table">
+                    <tr>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Trạng thái</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ID_USER</td>
+                            <td>***</td>
+                            <td>@item.TRANGTHAI</td>
+                        </tr>
+                    }
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

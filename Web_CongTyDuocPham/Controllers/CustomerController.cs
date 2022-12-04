@@ -31,6 +31,7 @@ namespace Web_CongTyDuocPham.Controllers
             return View();
         }
 
+        #region Loại
         // Hiển thị loại sản phẩm ------------------------------------------------------------------------------------------------
         public ActionResult HTLoai()
         {
@@ -46,14 +47,16 @@ namespace Web_CongTyDuocPham.Controllers
             // Trả về cùng 1 view với view Home
             return View("Products", dsSP);
         }
+        #endregion
 
         // Hiển thị danh sách tất cả dược phẩm -----------------------------------------------------------------------------------
         public ActionResult Products()
         {
-            List<DUOCPHAM> dsDP = data.DUOCPHAMs.ToList();
+            List<DUOCPHAM> dsDP = data.DUOCPHAMs.Take(16).ToList();
             return View(dsDP);
         }
 
+        #region Dăng ký Và Đăng Nhập
         // Đăng nhập -------------------------------------------------------------------------------------------------------------
         [HttpGet]
         public ActionResult DangNhap()
@@ -71,6 +74,9 @@ namespace Web_CongTyDuocPham.Controllers
             TAIKHOAN kh = data.TAIKHOANs.SingleOrDefault(k => k.ID_USER == ten && k.PASS == mk);
             if (kh == null) // Đăng nhập không thành công, hiển thị thông báo
                 return RedirectToAction("Error", "Customer");
+
+            if (ten == "Admin" || ten == "admin") // Tài khoản quản trị chuyển hướng sang trang quản lý
+                return RedirectToAction("HomeAdmin", "Admin");
 
             Session["KhachHang"] = kh; // Kiểu đối tượng khách hàng
             return RedirectToAction("Home", "Customer");
@@ -99,6 +105,7 @@ namespace Web_CongTyDuocPham.Controllers
             data.SubmitChanges();
             return PartialView("DangKy", "Customer");
         }
+        #endregion
 
         // Trả về chi tiết 1 dược phẩm theo mã danh mục -------------------------------------------------------------------------
         public ActionResult ChiTietSP(int id)
@@ -116,6 +123,7 @@ namespace Web_CongTyDuocPham.Controllers
             return View(sp);
         }
 
+        #region Tìm Kiếm
         // Tìm kiếm -------------------------------------------------------------------------------------------------------------
         public ActionResult TimKiem()
         {
@@ -130,11 +138,12 @@ namespace Web_CongTyDuocPham.Controllers
             string tuKhoa = fct["txtTuKhoa"].ToString();
             string maLoai = fct["maLoai"].ToString();
 
-            List<DUOCPHAM> dsS = data.DUOCPHAMs.Where(t => t.TEN_DUOCPHAM.Contains(tuKhoa) 
+            List<DUOCPHAM> dsS = data.DUOCPHAMs.Where(t => t.TEN_DUOCPHAM.Contains(tuKhoa)
                 == true && t.ID_DANHMUC == int.Parse(maLoai)).ToList();
 
             return View("Products", dsS);
         }
+        #endregion
 
         // Button chọn mua --------------------------------------------------------------------------------
         public ActionResult ChonMua(string id)
@@ -165,19 +174,22 @@ namespace Web_CongTyDuocPham.Controllers
             TAIKHOAN khach = Session["KhachHang"] as TAIKHOAN;
 
             if (khach == null) // Chưa đăng nhập
-                return View("DangNhap", "Customer");
+                return RedirectToAction("DangNhap", "Customer");
             // Đã tồn tại khách hàng (Đăng nhập thành công)
             return View(khach);
         }
-
+        //public ActionResult LuuDatHang()
+        //{
+        //    return View();
+        //}
         // Lưu thông tin đặt hàng -------------------------------------------------------------------------
-        [HttpPost]
+        //[HttpPost]
         public ActionResult LuuDatHang(FormCollection col)
         {
             try
             {
                 GioHang gh = (GioHang)Session["gio"];
-                KHACHHANG kh = (KHACHHANG)Session["KhachHang"];
+               // KHACHHANG kh = (KHACHHANG)Session["KhachHang"];
                 if (Session["KhachHang"] == null)
                     return RedirectToAction("DangNhap", "Customer");
                 if (Session["gio"] == null || gh.lst.Count == 0) // Giỏ hàng rỗng
@@ -186,12 +198,15 @@ namespace Web_CongTyDuocPham.Controllers
                 // Lấy thông tin ngày giao
                 string ngayGiao = col["txtNgay"];
                 DateTime ngayGiao_dateTime = Convert.ToDateTime(ngayGiao);
-
                 // Lưu vào bảng đặt hàng
                 HOADON hd = new HOADON();
-                hd.ID_KHACHHANG = kh.ID_KHACHHANG;
+               // hd.ID_KHACHHANG = kh.ID_KHACHHANG;
+                hd.ID_KHACHHANG = "KH002";
                 hd.NGAYLAP = DateTime.Now;
                 hd.NGAYGIAO = ngayGiao_dateTime;
+                hd.ID_NHANVIEN = 1;
+                hd.ID_LOAIHINH = 1;
+                hd.TRANGTHAI = "Đã thanh toán";
                 data.HOADONs.InsertOnSubmit(hd);
                 data.SubmitChanges();
 
@@ -202,6 +217,7 @@ namespace Web_CongTyDuocPham.Controllers
                     cthd.ID_HOADON = hd.ID_HOADON;
                     cthd.ID_DUOCPHAM = int.Parse(sp.iMaSP);
                     cthd.SOLUONG = sp.iSoLuong;
+                    cthd.DONGIA = sp.dDonGia;
                     data.CT_HOADONs.InsertOnSubmit(cthd);
                 }
                 data.SubmitChanges();
@@ -212,7 +228,7 @@ namespace Web_CongTyDuocPham.Controllers
             {
                 ViewBag.tb = "Bạn chưa lưu được đơn hàng!";
             }
-            return View();
+            return RedirectToAction("HTGioHang", "Customer");
         }
 
         // Lấy giỏ hàng 
@@ -231,21 +247,34 @@ namespace Web_CongTyDuocPham.Controllers
         // Xóa giỏ hàng -----------------------------------------------------------------------------------
         public ActionResult XoaGioHang(string maSP)
         {
+            GioHang gh = Session["gio"] as GioHang;
             // Lấy giỏ hàng
             List<DanhMucGioHang> lstGH = layGioHang();
             // Kiểm tra xem sách cần xóa có trong giỏ hàng không?
-            DanhMucGioHang sp = lstGH.Single(s => s.iMaSP == maSP);
-
-            // Nếu có thì tiến hành xóa
-            if (sp != null)
+            foreach (DanhMucGioHang item in gh.lst)
             {
-                lstGH.RemoveAll(s => s.iMaSP == maSP);
-                return RedirectToAction("gio", "gio");
+                if (item.iMaSP == maSP)
+                {
+                    lstGH.RemoveAll(s => s.iMaSP == maSP);
+                    return RedirectToAction("HTGioHang", "Customer");
+                }
+                // Nếu giỏ hàng rỗng
+                if (lstGH.Count == 0)
+                    return RedirectToAction("Home", "Customer");
+                return RedirectToAction("HTGioHang", "Customer");
             }
-            // Nếu giỏ hàng rỗng
-            if (lstGH.Count == 0)
-                return RedirectToAction("Home", "Customer");
-            return RedirectToAction("gio", "gio");
+            return RedirectToAction("HTGioHang", "Customer");
+
+            //// Nếu có thì tiến hành xóa
+            //if (sp != null)
+            //{
+            //    lstGH.RemoveAll(s => s.iMaSP == maSP);
+            //    return RedirectToAction("gio", "gio");
+            //}
+            //// Nếu giỏ hàng rỗng
+            //if (lstGH.Count == 0)
+            //    return RedirectToAction("Home", "Customer");
+            //return RedirectToAction("gio", "gio");
         }
     }
 }

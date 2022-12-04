@@ -1,0 +1,47 @@
+﻿@using Web_CongTyDuocPham.Models;
+@{
+    ViewBag.Title = "ProductsAdmin";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+@model List<DUOCPHAM>
+
+<div class="container-fluid">
+    @* Tiêu đề ----------------------------------------------------------------------------------------- *@
+    <div class="row p-2 text-center mb-5">
+        <div class="col-md-12 align-items-center justify-content-center">
+            <h4 class="fw-bold">DANH SÁCH DƯỢC PHẨM</h4>
+        </div>
+    </div>
+
+    @* Nội dung ---------------------------------------------------------------------------------------- *@
+    <div class="row mt-2 mb-2">
+        <div class="col-md-12 text-center">
+            <form action="#" method="post">
+                <table class="table justify-content-center align-items-center">
+                    <tr>
+                        <th class="w-10">Mã SP</th>
+                        <th class="w-10">Tên SP</th>
+                        <th class="w-20">Mã loại</th>
+                        <th class="w-10">Giá bán</th>
+                        <th class="w-40">Hình ảnh minh họa</th>
+                        <th colspan="2">Chức năng</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ID_DUOCPHAM</td>
+                            <td>@item.TEN_DUOCPHAM</td>
+                            <td>@item.ID_LOAIDUOCPHAM</td>
+                            <td>@String.Format("{0:#,##}", item.GIA) VNĐ</td>
+                            <td><img src="~/Content/images/@item.HINHANH" class="w-25" /></td>
+                            <td><a href="#">Xóa</a></td>
+                            <td><a href="#">Sửa</a></td>
+                        </tr>
+                    }
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

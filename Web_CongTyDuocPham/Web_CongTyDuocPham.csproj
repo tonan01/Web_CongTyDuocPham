@@ -121,6 +121,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -354,6 +355,7 @@
     <Content Include="Content\images\97.png" />
     <Content Include="Content\images\98.png" />
     <Content Include="Content\images\99.png" />
+    <Content Include="Content\images\admin-page.png" />
     <Content Include="Content\images\error.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logout.png" />
@@ -436,6 +438,12 @@
     <Content Include="Views\Customer\LuuDatHang.cshtml" />
     <Content Include="Views\Customer\XacNhanThongTin.cshtml" />
     <Content Include="Views\Customer\HTLoai.cshtml" />
+    <Content Include="Views\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\HomeAdmin.cshtml" />
+    <Content Include="Views\Admin\ProductsAdmin.cshtml" />
+    <Content Include="Views\Admin\Customer.cshtml" />
+    <Content Include="Views\Admin\Bill.cshtml" />
+    <Content Include="Views\Admin\Statistical.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

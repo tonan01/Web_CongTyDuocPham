@@ -9,6 +9,25 @@
 @* Hiển thị 1 dược phẩm *@
 @model DUOCPHAM
 
+<style>
+    .product-item__name {
+        font-weight: 400;
+        height: 39px !important;
+        line-height: -0.19999999999999996rem;
+        overflow: hidden;
+        /* dấu ... cuối  */
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        /* tác động dòng 2 */
+        -webkit-line-clamp: 2;
+    }
+
+    .btn-product-item {
+        width: 87px;
+    }
+</style>
+
 <div class="container-fluid">
     @* Tiêu đề ----------------------------------------------------------------------------------------- *@
     <div class="row p-2 text-center mb-5">
@@ -46,12 +65,12 @@
                 <div class="row text-center">
                     @foreach (var s in lst)
                     {
-                        <div class="col-md-3 mb-3 text-center">
+                        <div class="col-md-3 mb-3 text-center product-item-text-center">
                             <div class="card bg-light mb-3">
-                                <img class="card-img-top" src="~/Content/images/@s.HINHANH" width="100%">
+                                <img class="card-img-top" src="~/Content/images/@s.HINHANH" width="75%">
                                 <div class="card-body">
-                                    <h6 style="font-size:15px;" class="card-title">@s.TEN_DUOCPHAM</h6>
-                                    <p class="card-text">Giá: <text style="font-weight: bold" class="text-danger">@s.GIA</text></p>
+                                    <h4 class="product-item__name" style="FONT-WEIGHT: 300; font-size: 1rem;">@s.TEN_DUOCPHAM</h4>
+                                    <p class="card-text">Giá: <text style="font-weight: bold" class="text-danger">@string.Format("{0:0,0}", s.GIA) VNĐ</text></p>
                                 </div>
                                 <div class="card-footer">
                                     <a href="@Url.Action("ChiTietSP",new {@id=@s.ID_DUOCPHAM })" class="btn btn-outline-primary">Chi tiết</a>

@@ -3,47 +3,53 @@
     ViewBag.Title = "XacNhanThongTin";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
+@using (Html.BeginForm())
+{
+    //ValidationSummary hiển thị tất cả lỗi
+    @Html.ValidationSummary(true)
+    {
+        @model TAIKHOAN
 
-@model TAIKHOAN
+        <div class="container-fluid">
+            @* Tiêu đề ----------------------------------------------------------------------------------------- *@
+            <div class="row p-2 text-center mb-5">
+                <div class="col-md-12 align-items-center justify-content-center">
+                    <img src="~/Content/images/order.png" class="w-25" />
+                    <h4 class="fw-bold">ĐẶT HÀNG</h4>
+                </div>
+            </div>
 
-<div class="container-fluid">
-    @* Tiêu đề ----------------------------------------------------------------------------------------- *@
-    <div class="row p-2 text-center mb-5">
-        <div class="col-md-12 align-items-center justify-content-center">
-            <img src="~/Content/images/order.png" class="w-25" />
-            <h4 class="fw-bold">ĐẶT HÀNG</h4>
+            @* Nội dung ---------------------------------------------------------------------------------------- *@
+            <div class="row text-center mb-5">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <form action="/Customer/LuuDatHang" method="post">
+                        <table class="table text-center">
+                            <tr>
+                                <td>Họ tên khách hàng: </td>
+                                <td>@Model.ID_USER</td>
+                            </tr>
+                            <tr>
+                                @* Ngày đặt là ngày hiện tại *@
+                                <td>Ngày đặt:</td>
+                                <td>@DateTime.Now.ToShortDateString()</td>
+                            </tr>
+                            <tr>
+                                <td>Ngày giao hàng:</td>
+                                <td>
+                                    <input type="date" name="txtNgay" class="glyphicon-calendar" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                  <a href="@Url.Action("LuuDatHang", "Customer", new { @class = "btn btn-outline-success" })">hihi</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
         </div>
-    </div>
-
-    @* Nội dung ---------------------------------------------------------------------------------------- *@
-    <div class="row text-center mb-5">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <form action="/Customer/LuuDatHang" method="post">
-                <table class="table text-center">
-                    <tr>
-                        <td>Họ tên khách hàng: </td>
-                        <td>@Model.ID_USER</td>
-                    </tr>
-                    <tr>
-                        @* Ngày đặt là ngày hiện tại *@
-                        <td>Ngày đặt:</td>
-                        <td>@DateTime.Now.ToShortDateString()</td>
-                    </tr>
-                    <tr>
-                        <td>Ngày giao hàng:</td>
-                        <td>
-                            <input type="date" name="txtNgay" class="glyphicon-calendar" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center">
-                            <input class="btn btn-outline-success" type="submit" value="Đồng ý đặt hàng" />
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-        <div class="col-md-3"></div>
-    </div>
-</div>
+    }
+}
